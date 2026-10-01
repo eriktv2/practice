@@ -1,6 +1,6 @@
-import { test, expect } from '@playwright/test';
-import { YourStorePage } from '../pages/YourStorePage';
 // @ts-check
+import { test, expect } from '@playwright/test';
+import { YourStorePage } from '../pages/YourStorePage.ts';
 test.describe('My eCommerce website', () => {
   test('has title', async ({ page }) => {
     await page.goto('https://ecommerce-playground.lambdatest.io/');
