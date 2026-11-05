@@ -13,4 +13,7 @@ export class SpecialOffersPage {
   async clickContinue() {
     await this.continueButton.click();
   }
+  async clickFirstProduct() {
+    await this.page.getByPlaceholder('Search For Products').first().click();
+  }
 }

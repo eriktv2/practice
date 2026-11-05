@@ -21,6 +21,6 @@ test.describe('Your Store Site', () => {
     await yourStorePage.gotoYourStorePage();
     await yourStorePage.clickSpecialHot();
     await specialOffersPage.clickContinue();
-    await page.getByPlaceholder('Search For Products').first().click();
+    await specialOffersPage.clickFirstProduct();
   });
 }); 
