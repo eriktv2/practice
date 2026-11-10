@@ -7,7 +7,7 @@ export class YourStorePage {
   readonly url: string;
   constructor(page: Page) {
     this.page = page;
-    this.url = 'https://ecommerce-playground.lambdatest.io/your-store';
+    this.url = 'https://ecommerce-playground.lambdatest.io';
     this.specialHot = page.getByRole('link', { name: 'Special Hot', exact: true });
   }
   async clickSpecialHot() {
