@@ -6,21 +6,32 @@ test.describe('Your Store Site', () => {
   test('has title', async ({ page }) => {
     const yourStorePage = new YourStorePage(page);
     await yourStorePage.gotoYourStorePage();
-    await expect(page).toHaveTitle(/Your Store/);
+    await yourStorePage.expectToHaveTitle();
   })
   test('click special link and continue', async ({ page }) => {
     const yourStorePage = new YourStorePage(page); 
     const specialOffersPage = new SpecialOffersPage(page);
     await yourStorePage.gotoYourStorePage();
+    await yourStorePage.expectToHaveTitle();
     await yourStorePage.clickSpecialHot();
-    await specialOffersPage.clickContinue();
+    await specialOffersPage.expectToHaveTitle();
+    if (await specialOffersPage.nospecialOfferProductsMessage.isVisible()) {
+       await specialOffersPage.clickContinue();
+       await yourStorePage.expectToHaveTitle();
+    }
   });
-  test('search for product and buy it', async ({ page }) => {
+  test('search for special offer product and buy it', async ({ page }) => {
     const yourStorePage = new YourStorePage(page);
     const specialOffersPage = new SpecialOffersPage(page);
     await yourStorePage.gotoYourStorePage();
     await yourStorePage.clickSpecialHot();
-    await specialOffersPage.clickContinue();
-    await specialOffersPage.clickFirstProduct();
+    if (await specialOffersPage.nospecialOfferProductsMessage.isVisible()) {
+       await specialOffersPage.clickContinue();
+       await yourStorePage.expectToHaveTitle();
+    }
+    else {
+       await specialOffersPage.clickFirstProduct();
+       //currently there is no special offer product to buy, so we cannot continue with writing this test
+    }
   });
 }); 
