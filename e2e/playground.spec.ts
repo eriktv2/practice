@@ -7,7 +7,7 @@ test.describe('Your Store Site', () => {
     const yourStorePage = new YourStorePage(page);
     await yourStorePage.gotoYourStorePage();
     await yourStorePage.expectToHaveTitle();
-  })
+  });
   test('click special link and continue', async ({ page }) => {
     const yourStorePage = new YourStorePage(page); 
     const specialOffersPage = new SpecialOffersPage(page);
@@ -15,6 +15,8 @@ test.describe('Your Store Site', () => {
     await yourStorePage.expectToHaveTitle();
     await yourStorePage.clickSpecialHot();
     await specialOffersPage.expectToHaveTitle();
+    await specialOffersPage.nospecialOfferProductsMessage.waitFor({ state: 'visible', timeout: 2000 });
+    //console.log("Is 'No special offer products' message visible? " + await specialOffersPage.nospecialOfferProductsMessage.isVisible());
     if (await specialOffersPage.nospecialOfferProductsMessage.isVisible()) {
        await specialOffersPage.clickContinue();
        await yourStorePage.expectToHaveTitle();
@@ -25,6 +27,9 @@ test.describe('Your Store Site', () => {
     const specialOffersPage = new SpecialOffersPage(page);
     await yourStorePage.gotoYourStorePage();
     await yourStorePage.clickSpecialHot();
+    await specialOffersPage.expectToHaveTitle();
+    await specialOffersPage.nospecialOfferProductsMessage.waitFor({ state: 'visible', timeout: 2000 });
+    //console.log("Is 'No special offer products' message visible? " + await specialOffersPage.nospecialOfferProductsMessage.isVisible());
     if (await specialOffersPage.nospecialOfferProductsMessage.isVisible()) {
        await specialOffersPage.clickContinue();
        await yourStorePage.expectToHaveTitle();
